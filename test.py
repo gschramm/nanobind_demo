@@ -2,9 +2,11 @@ import vecadd_ext
 
 import cupy as cp
 
-a = cp.arange(3, dtype = cp.float32)
-b = cp.arange(3, dtype = cp.float32)**2
-c = cp.zeros(3, dtype=cp.float32)
+shape = (2, 2,3)
+
+a = cp.ones(shape, dtype = cp.float32)
+b = cp.ones(shape, dtype = cp.float32)**2
+c = cp.zeros(shape, dtype=cp.float32)
 
 vecadd_ext.add_inplace(a,b,c)
 print(a,b,c)
@@ -12,9 +14,9 @@ assert cp.all(cp.isclose(a+b,c))
 
 import numpy as np
 
-a = np.arange(3, dtype = np.float32)
-b = np.arange(3, dtype = np.float32)**2
-c = np.zeros(3, dtype=np.float32)
+a = np.ones(shape, dtype = np.float32)
+b = np.ones(shape, dtype = np.float32)**2
+c = np.zeros(shape, dtype=np.float32)
 
 vecadd_ext.add_inplace(a,b,c)
 print(a,b,c)

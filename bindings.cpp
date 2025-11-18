@@ -43,6 +43,18 @@ void add_inplace_any(ConstFloatArray a, ConstFloatArray b, FloatArray out)
             "add_inplace: last dimension must be 3 (e.g. [..., 3])");
     }
 
+    // calculate the product of all dimensions
+    size_t nvoxels = 1;
+    for (size_t i = 0; i < ndim; ++i)
+    {
+        nvoxels *= a.shape(i);
+    }
+    std::cout << "Total number of elements: " << nvoxels << "\n";
+
+    int img_dim[3] = {static_cast<int>(a.shape(0)),
+                      static_cast<int>(a.shape(1)),
+                      static_cast<int>(a.shape(2))};
+
     // 5. Ensure all arrays live on the same device
     int dev_type = a.device_type();
     int dev_id = a.device_id();
